@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Employers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Empleados</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employers.each do |employer| %>
+      <tr>
+        <td><%= employer.name %></td>
+        <td><%= employer.email %></td>
+        <td><%= employer.phone %></td>
+        <td><%= employer.employees.pluck(:name) %>
+
+        <%=form_tag(add_employee_employer_path(employer))do%>
+        <%=text_field_tag "name"%>
+        <%end%>
+      </td>
+
+        <td><%= link_to 'Show', employer %></td>
+        <td><%= link_to 'Edit', edit_employer_path(employer) %></td>
+        <td><%= link_to 'Destroy', employer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Employer', new_employer_path %>
